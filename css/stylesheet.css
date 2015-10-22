@@ -76,14 +76,14 @@ ul {
 /* table styling */
   table, td, tr {
   border:1px solid black ;
-  margin:25px ;
+  margin:20px ;
   text-align:center ;
 }
 
 /* table styling */
 	th {
   border:1px solid black ;
-  margin:25px ;
+  margin:20px ;
   text-align:center ;
-  background-color:#003366 ;
+  background-color:#B2C2D1 ;
 }

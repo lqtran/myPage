@@ -15,63 +15,103 @@
 		<title>Long Tran's Main Page</title>
 		<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 		
-		<!-- Json script -->
-
-		<!-- Script containing the dynamic text formatting -->
-		<script type="text/javascript" src="json/json6.json"></script>
-
- 		<script type="text/javascript">
-    		function placeContent()
-    		{
-      			var strContent = "" ;
-
-      			strContent += "<table><tr>" ;
-      
-      			for(var i = table.row.offset - 1; i <= table.row.end ; i = i + table.row.inc)
-      			{
-		    			strContent += "<td>" + i + "</td>" ;
-	    		}
-      
-      		var rowEnd = table.row.end ;
-      		var colEnd = table.column.end ;
-      
-     		while( rowEnd % table.row.inc != 0 )
-      		{
-        		rowEnd = rowEnd - 1 ;
-      		}
-      
-      		while( colEnd % table.column.inc != 0 )
-      		{
-        		colEnd = colEnd - 1 ;
-     		}
-      
-      		strContent += "</tr><tr>" ;
-      
-      		for(var i = table.row.offset - 1 ; i <= rowEnd - table.row.inc; i = i )
-      		{
-       			i = i + table.row.inc ;
-        		strContent += "<td>" + i + "</td>" ;
-        		for(var j = table.column.offset - 1 ; j <= colEnd - table.column.inc; j = j)
-        		{
-          			j = j + table.column.inc ;
-          			strContent += "<td>" + i * j + "</td>" ;
-        		}
-        		strContent += "</tr><tr>" ;
-     		}
-      
-      		strContent += "</tr>" ;
-      
-      		document.getElementById( "content" ).innerHTML =  strContent ;
+  <!-- loading jQuery Library -->  
+  <script src="js/jquery.min.js"></script>
+  
+  <!-- function to get URL parameters
+  src: https://css-tricks.com/snippets/javascript/get-url-variables/
+  -->
+  <script type="text/javascript">
+  function getParam( variable )
+    {
+       var query = window.location.search.substring(1);
+       var vars = query.split("&");
+       for (var i=0;i<vars.length;i++) {
+               var pair = vars[i].split("=");
+               if(pair[0] == variable){return pair[1];}
+       }
+       return(false);
     }
+
+  </script>
+  
+  <!-- Script containing the dynamic table -->
+  <script type="text/javascript">
+
+    var table = { "row" : { "start": 1,
+                               "end": 12},
+               "column" : { "start": 1,
+                               "end": 12} } ;
+    
+
+    $(document).ready(function()
+    {
+
+      var rowStart = 0 ;
+      var rowEnd    = 0 ;
+
+      var colStart = 0 ;
+      var colEnd    = 0 ;
+
+      if (getParam("startR") != null )
+        rowStart = parseInt(getParam("startR")) ;
+      else 
+        rowStart = table.row.start ;
+
+      if (getParam("endR") != null )
+        rowEnd = parseInt(getParam("endR")) ;
+      else
+        rowEnd = table.row.end ;
+
+      if (getParam("startC") != null )
+        colStart = parseInt(getParam("startC")) ;
+      else 
+        colStart = table.column.start ;
+
+      if (getParam("endC") != null )
+        colEnd = parseInt(getParam("endC")) ;
+      else
+        colEnd = table.column.end ;
+
+
+      var multTable = $("<table></table>") ;
+      var rows      = $("<tr></tr>") ;
+      rows.append("<th></th>");
+      
+      for(var i = colStart ; i <= colEnd ; i++)
+      {
+        rows.append("<th>" + i + "</th>") ;
+      }
+      
+      multTable.append(rows) ;
+      
+      for(var i = rowStart ; i <= rowEnd ; i++)
+      {
+        var newRow = $("<tr></tr>") ;
+        newRow.append("<th>" + i + "</th>") ;
+        
+        for(var j = colStart ; j <= colEnd ; j++)
+        {
+          newRow.append("<td>" + (i*j) + "</td>") ;
+        }
+        
+        multTable.append(newRow) ;
+      }
+      
+      $("#newTable").append(multTable);
+    });
     
   </script>
 
 	</head>
-    <body onload="placeContent()">
+
+    <body>
+
     <div id="header">
 	<!-- Top of the page for header/title -->
     <h1><a href="http://lqtran.github.io/myPage/index.html">Long Tran's Home</a></h1>
     </div>
+
     <div id="nav">
 	<!-- Left of the page for navigation -->
     <h3><strong><center>Index for Assignments</center></strong></h3>
@@ -81,13 +121,28 @@
         <li><a href="http://lqtran.github.io/myPage/assignment3.html">Assignment 3</a></li>
         <li><a href="http://lqtran.github.io/myPage/assignment4.html">Assignment 4</a></li>
         <li><a href="http://lqtran.github.io/myPage/assignment5.html">Assignment 5</a></li>
-		<li><a href="http://lqtran.github.io/myPage/assignment6.html">Assignment 6</a></li>
+		    <li><a href="http://lqtran.github.io/myPage/assignment6.html">Assignment 6</a></li>
     </ul>
     </div>
+
     <div id="section">
 	<!-- mid content part of the page -->
+      <h1>Assignment 6: Creating a Interactive Dynamic Table</h1>
+      
     <div id="content" >
 	<!-- dynamic text/content for the page -->
+      <h3>Please input numbers to generate a multiplication table:</h3>
+        <!-- Code for input boxes and the Submit button -->
+      <form id="frm" style="padding-left:20px">
+        Start Value (Row): <input type="text" name="startR"><br>
+        Ending Value (Row): <input type="text" name="endR"><br>
+        Start Value (Column): <input type="text" name="startC"><br>
+        Ending Value (Column): <input type="text" name="endC"><br>
+        <input type="submit" value="Submit">
+      </form>
+
+      <div id="newTable"></div>
+
     </div>
 
     </div>

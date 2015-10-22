@@ -1,0 +1,44 @@
+/***************************************************************
+
+	File: ~ltran/public_html/jsontest.json
+	91.461 Assignment: Formatting Dynamic Text
+	Long Tran, UMass Lowell Computer Science Undergraduate
+	long_tran@student.uml.edu
+	Please do not use any material or code without permission.
+	
+	Updated: October 6, 2015
+	
+	This is the JSON file for Assignment 5 using an excerpt from
+	"The Alchemist" by Paulo Coelho.
+	
+***************************************************************/
+
+var jsontest = 
+{
+	"assign": "Assignment 5: Formatting Dynamic Text",
+	
+	"title": "The Alchemist",
+	
+	"author": "By Paulo Coelho",
+	
+	"first": "It was the pure Language of the World.\
+			It required no explanation, just as the universe needs none as it travels through endless time. \
+			What the boy felt at that moment was that he was in the presence of the only woman in his life, \
+			and that, with no need for words, she recognized the same thing. ",
+			
+	"second": "He was more certain of it than of anything in the world. \
+			He had been told by his parents and grandparents that he must fall in love \
+			and really know a person before becoming committed. \
+			But maybe people who felt that way had never learned the universal language.",
+				
+	"third": "Because, when you know that language, it's easy to understand that someone in the world awaits you, \
+			whether it's in the middle of the desert or in some great city. And when two such people encounter each other, \
+			and their eyes meet, the past and the future become unimportant.",
+		
+	"fourth": "There is only that moment, and the incredible certainty that everything under the sun has been written \
+			by one hand only. It is the hand that evokes love, and creates a twin soul for every person in the world. \
+			Without such love, one's dreams would have no meaning.",
+
+};
+
+console.log( "JSON data loaded properly." ) ;

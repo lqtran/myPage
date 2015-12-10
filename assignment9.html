@@ -1,0 +1,136 @@
+
+<!DOCTYPE html>
+<!--
+  File: ~ltran/public_html/assignment9.html
+  91.461 Assignment 9: Scrabble Drag n' Drop
+  Long Tran, UMass Lowell Computer Science Undergraduate
+  long_tran@student.uml.edu
+  Please do not use any material or code without permission.
+  
+  Updated: Dec 9th, 2015
+
+  ***For this assignment, I have to credit everything to Charlie Sopiep
+      SOURCE: http://cpsopiep.github.io/myWebsite/Assignment09.html
+
+      I tried to to work around his code but I can't seem to make it so
+      it could re-rack, or submit a type of word because of the way the
+      tiles work in your hand.  He made it so it appends the pieces to a rack
+      so there is no real grab bag of letters to circumvent the distribution of letters
+      in your hand other than refreshing the page.
+
+      I couldn't write any of the code myself, it seemed like a huge project that
+      I couldn't handle until I felt more comfortable coding with jquery/javascript.
+      I understood that thru the jQuery UI that people managed to use the draggable and droppable features, and able to calculate the way words have values.
+
+      But I didn't understand how to connect a distribution table of words to the rack.
+      If I were to work on this more, I would revamp the way the tiles work in your hand,
+      and make it so that the pieces that work in hand could snap in and rearrange when
+      wanted.  Probably populate a whole table and such.
+
+      The only real work I really did was made a reset button which only really refreshed
+      the page. 
+
+      And also renamed the blank tile because the image link was broken when it tried to look for the blank tile.
+-->
+
+<html>
+  <head>
+    <!-- css loading-->
+    <link type="text/css" rel="stylesheet" href="css/stylesheet.css" />
+    <link rel="stylesheet" href="css/assignment9.css" > 
+    <link rel="stylesheet" href="JQueryUI/jquery-ui.css" >
+
+    <title>Long Tran's Main Page</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    
+  <!-- loading jQuery Library -->  
+  <script src="js/jquery.min.js"></script>
+  <script src="JQuery/Plugins/jquery.validate.min.js"></script>
+  <script src="JQuery/Plugins/additional-methods.min.js"></script>
+  <script src="JQueryUI/jquery-ui.js"></script>
+  <script src="JQueryUI/jquery-ui.min.js"></script>
+
+  <!-- javascript loading -->
+  <script src='Assignment09.js'> </script>
+
+  </head>
+
+    <body>
+
+    <div id="header">
+  <!-- Top of the page for header/title -->
+    <h1><a href="http://lqtran.github.io/myPage/index.html">Long Tran's Home</a></h1>
+    </div>
+
+    <div id="nav">
+  <!-- Left of the page for navigation -->
+    <h3><strong><center>Index for Assignments</center></strong></h3>
+    <ul>
+        <li><a href="http://lqtran.github.io/myPage/assignment1.html">Assignment 1</a></li>
+        <li><a href="http://lqtran.github.io/myPage/assignment2.html">Assignment 2</a></li>
+        <li><a href="http://lqtran.github.io/myPage/assignment3.html">Assignment 3</a></li>
+        <li><a href="http://lqtran.github.io/myPage/assignment4.html">Assignment 4</a></li>
+        <li><a href="http://lqtran.github.io/myPage/assignment5.html">Assignment 5</a></li>
+        <li><a href="http://lqtran.github.io/myPage/assignment6.html">Assignment 6</a></li>
+        <li><a href="http://lqtran.github.io/myPage/assignment7.html">Assignment 7</a></li>
+        <li><a href="http://lqtran.github.io/myPage/assignment8.html">Assignment 8</a></li>
+        <li><a href="http://lqtran.github.io/myPage/assignment9.html">Assignment 9</a></li>
+    </ul>
+    </div>
+
+    <div id="section">
+  <!-- mid content part of the page -->
+  <div id="Assn9-main01">
+      <h1>Assignment 9: Scrabble Drag n' Drop</h1>
+      
+    <div id="content" >
+  <!-- dynamic text/content for the page -->
+
+  <!--Loading Board -->
+  <div id="Board">
+        <img src="images/Scrabble_BlankSquare_01.jpg" alt="none" id=1 draggable= false class="test"/>
+        <img src="images/Scrabble_BlankSquare_01.jpg" alt="none" id=2  draggable= false class="test"/>
+        <img src="images/Scrabble_DoubleWordScore01.jpg" alt="none" id=3  draggable= false class="test"/>
+        <img src="images/Scrabble_BlankSquare_01.jpg" alt="none" id=4  draggable= false class="test"/>
+        <img src="images/Scrabble_BlankSquare_01.jpg" alt="none" id=5  draggable= false class="test"/>
+        <img src="images/Scrabble_DoubleWordScore01.jpg" alt="none" id=6  draggable= false class="test"/>
+        <img src="images/Scrabble_BlankSquare_01.jpg" alt="none"  id=7 draggable= false class="test"/>
+    </div>
+
+<!-- Shows the current word and score -->
+<div id="WordContainer">
+    <br>
+    <label>Word:</label>
+    <label id="word"></label>
+    <br>
+    <label>Score:</label>
+    <label id="score"></label>
+</div>
+
+<!-- Reset Button, actually only refreshes the page on click -->
+<div class="reset">
+<button type="button" align="center" onClick="window.location.reload()">Reset</button>
+</div>
+
+<br>
+<br>
+
+<!-- loads the rack image underneath the scrabble pieces -->
+<div id="Tile-Holder">
+    <img src="images/scrabble-tile-holder.png" alt="none" id="holder" draggable= false class="test1"/>
+</div>
+<div id="rack"></div>
+    
+
+</div>
+      
+    </div>
+
+    </div>
+
+    <div id="footer">
+  <!-- bottom page for footer -->
+    Please email me at: long_tran@student.uml.edu for any questions or problems.
+    </div>
+    </body>
+</html>

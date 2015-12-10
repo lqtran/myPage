@@ -5,7 +5,7 @@
 	long_tran@student.uml.edu
 	Please do not use any material or code without permission.
 	
-	Updated: October 20, 2015
+	Updated: December 9th, 2015
 */
 
 /* Header styling */
@@ -31,9 +31,9 @@
 
 /* Content/mid section styling */
 #section {
-    width:350px;
+    width:700px;
     float:left;
-    padding:10px; 
+    padding:20px; 
 }
 
 /* footer styling */

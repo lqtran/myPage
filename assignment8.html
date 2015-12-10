@@ -1,0 +1,205 @@
+<!DOCTYPE html>
+<!--
+	File: ~ltran/public_html/assignment6.html
+	91.461 Assignment 6: Creating an Interactive Dynamic Table
+	Long Tran, UMass Lowell Computer Science Undergraduate
+	long_tran@student.uml.edu
+	Please do not use any material or code without permission.
+	
+	Updated: October 20, 2015
+-->
+
+<html>
+	<head>
+		<link type="text/css" rel="stylesheet" href="css/stylesheet.css" />
+		<title>Long Tran's Main Page</title>
+		<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+		
+  <!-- loading jQuery Library -->  
+  <script src="js/jquery.min.js"></script>
+  <script src="js/jquery.validate.min.js"></script>
+  <script src="js/additional-methods.min.js"></script>
+  
+  <!-- function to get URL parameters
+  src: https://css-tricks.com/snippets/javascript/get-url-variables/
+  -->
+  <script type="text/javascript">
+  function getParam( variable )
+    {
+       var query = window.location.search.substring(1);
+       var vars = query.split("&");
+       for (var i=0;i<vars.length;i++) {
+               var pair = vars[i].split("=");
+               if(pair[0] == variable){return pair[1];}
+       }
+       return(false);
+    }
+
+  </script>
+  
+  <!-- Script containing the dynamic table -->
+  <script type="text/javascript">
+
+    var table = { "row" : { "start": 1,
+                               "end": 12},
+               "column" : { "start": 1,
+                               "end": 12} } ;
+    
+
+    $(document).ready(function()
+    {
+
+      var rowStart = 0 ;
+      var rowEnd    = 0 ;
+
+      var colStart = 0 ;
+      var colEnd    = 0 ;
+
+      if (getParam("startR") != null )
+        rowStart = parseInt(getParam("startR")) ;
+      else 
+        rowStart = table.row.start ;
+
+      if (getParam("endR") != null )
+        rowEnd = parseInt(getParam("endR")) ;
+      else
+        rowEnd = table.row.end ;
+
+      if (getParam("startC") != null )
+        colStart = parseInt(getParam("startC")) ;
+      else 
+        colStart = table.column.start ;
+
+      if (getParam("endC") != null )
+        colEnd = parseInt(getParam("endC")) ;
+      else
+        colEnd = table.column.end ;
+
+
+      var multTable = $("<table></table>") ;
+      var rows      = $("<tr></tr>") ;
+      rows.append("<th></th>");
+      
+      for(var i = colStart ; i <= colEnd ; i++)
+      {
+        rows.append("<th>" + i + "</th>") ;
+      }
+      
+      multTable.append(rows) ;
+      
+      for(var i = rowStart ; i <= rowEnd ; i++)
+      {
+        var newRow = $("<tr></tr>") ;
+        newRow.append("<th>" + i + "</th>") ;
+        
+        for(var j = colStart ; j <= colEnd ; j++)
+        {
+          newRow.append("<td>" + (i*j) + "</td>") ;
+        }
+        
+        multTable.append(newRow) ;
+      }
+      
+      $("#newTable").append(multTable);
+
+      //jQuery Validation Plug-in
+      $("#frm").validate({
+        rules: {
+          startR: {
+            required: true,
+            digits: true,
+          },
+          endR: {
+            required: true,
+            digits: true,
+          },
+          startC: {
+            required: true,
+            digits: true,
+          },
+          endC: {
+            required: true,
+            digits: true,
+          },
+        },
+        //Custom error messages
+        messages: {
+          startR: {
+            required:function() { return "<br>The start for rows needs to be entered." },
+            digits:function() { return "<br>The start for rows needs to be a positive integer." }
+          },
+          endR: {
+            required:function() { return "<br>The ending value for rows needs to be entered." },
+            digits:function() { return "<br>The ending for rows needs to be a positive integer." }
+          },
+          startC: {
+            required:function() { return "<br>The start for columns needs to be entered." },
+            digits:function() { return "<br>The start for columns needs to be a positive integer." }
+          },
+          endC: {
+            required:function() { return "<br>The ending value for columns needs to be entered." },
+            digits:function() { return "<br>The ending value for columns needs to be a positive integer." }
+          },
+        },
+        //Places error messages after submit button
+        errorPlacement : function( error, element ) {
+          $(error).appendTo( $("#frm") ) ;
+        } 
+      }) ;
+    });
+    
+  </script>
+
+	</head>
+
+    <body>
+
+    <div id="header">
+	<!-- Top of the page for header/title -->
+    <h1><a href="http://lqtran.github.io/myPage/index.html">Long Tran's Home</a></h1>
+    </div>
+
+    <div id="nav">
+	<!-- Left of the page for navigation -->
+    <h3><strong><center>Index for Assignments</center></strong></h3>
+    <ul>
+        <li><a href="http://lqtran.github.io/myPage/assignment1.html">Assignment 1</a></li>
+        <li><a href="http://lqtran.github.io/myPage/assignment2.html">Assignment 2</a></li>
+        <li><a href="http://lqtran.github.io/myPage/assignment3.html">Assignment 3</a></li>
+        <li><a href="http://lqtran.github.io/myPage/assignment4.html">Assignment 4</a></li>
+        <li><a href="http://lqtran.github.io/myPage/assignment5.html">Assignment 5</a></li>
+        <li><a href="http://lqtran.github.io/myPage/assignment6.html">Assignment 6</a></li>
+        <li><a href="http://lqtran.github.io/myPage/assignment7.html">Assignment 7</a></li>
+        <li><a href="http://lqtran.github.io/myPage/assignment8.html">Assignment 8</a></li>
+        <li><a href="http://lqtran.github.io/myPage/assignment9.html">Assignment 9</a></li>
+    </ul>
+    </div>
+
+    <div id="section">
+	<!-- mid content part of the page -->
+      <h1>Assignment 7: Using the jQuery Validation Plugin</h1>
+      
+    <div id="content" >
+	<!-- dynamic text/content for the page -->
+      <h3>Please input numbers to generate a multiplication table:</h3>
+        <!-- Code for input boxes and the Submit button -->
+      <form id="frm" style="padding-left:20px">
+        Start Value (Row): <input type="text" name="startR"><br>
+        Ending Value (Row): <input type="text" name="endR"><br>
+        Start Value (Column): <input type="text" name="startC"><br>
+        Ending Value (Column): <input type="text" name="endC"><br>
+        <input type="submit" value="Submit">
+      </form>
+
+      <div id="newTable"></div>
+
+    </div>
+
+    </div>
+
+    <div id="footer">
+	<!-- bottom page for footer -->
+    Please email me at: long_tran@student.uml.edu for any questions or problems.
+    </div>
+    </body>
+</html>
